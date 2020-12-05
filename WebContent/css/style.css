@@ -115,8 +115,8 @@ select{
     color: #cccccc;
     width: 36%;
     padding-right: 3%;
-    text-alien: right;
-    display: inline-block:
+    text-align: right;
+    display: inline-block;
 }
 
 #header a {
