@@ -12,12 +12,12 @@ public class EmployeeValidator {
     public static List<String> validate(Employee e, Boolean code_duplicate_check_flag, Boolean password_check_flag){
         List<String> errors = new ArrayList<String>();
 
-        String code_error = _validateCode(e.getCode(), code_duplicate_check_flag);
+        String code_error = validateCode(e.getCode(), code_duplicate_check_flag);
         if(!code_error.equals("")){
             errors.add(code_error);
         }
 
-        String name_error = _validateName(e.getName());
+        String name_error = validateName(e.getName());
         if(!name_error.equals("")){
             errors.add(name_error);
         }
@@ -30,7 +30,7 @@ public class EmployeeValidator {
         return errors;
     }
 
-    private static String _validateCode(String code, Boolean code_duplicate_check_flag){
+    private static String validateCode(String code, Boolean code_duplicate_check_flag){
         // 必須入力チェック
         if(code == null || code.equals("")){
             return "社員番号を入力してください。";
@@ -51,7 +51,7 @@ public class EmployeeValidator {
         }
 
         // 社員名の必須入力チェック
-     private static String _validateName(String name) {
+     private static String validateName(String name) {
             if(name == null || name.equals("")) {
                 return "氏名を入力してください。";
             }
