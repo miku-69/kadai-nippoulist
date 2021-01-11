@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import models.Employee;
 import models.Report;
+import models.Report_good;
 import utils.DBUtil;
 
 /**
@@ -35,11 +37,27 @@ public class ReportShowServlet extends HttpServlet {
         EntityManager em = DBUtil.createEntityManager();
 
         Report r = em.find(Report.class, Integer.parseInt(request.getParameter("id")));
+        Employee login_employee = (Employee)request.getSession().getAttribute("login_employee");
+
+        long g = (long)em.createNamedQuery("checkReport_good", Long.class)
+                .setParameter("employee", login_employee)
+                .setParameter("report", r)
+                .getSingleResult();
+
+        if(g != 0){
+        Report_good good = (Report_good)em.createNamedQuery("Report_good", Report_good.class)
+                                .setParameter("employee", login_employee)
+                                .setParameter("report", r)
+                                .getSingleResult();
+
+        request.setAttribute("report_good", good);
+        }
 
         em.close();
 
         request.setAttribute("report", r);
         request.setAttribute("_token", request.getSession().getId());
+        request.setAttribute("g",g);
 
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/reports/show.jsp");
         rd.forward(request, response);

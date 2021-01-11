@@ -49,10 +49,14 @@ public class ReportsIndexServlet extends HttpServlet {
         long reports_count = (long)em.createNamedQuery("getReportsCount", Long.class)
                                     .getSingleResult();
 
+/*        long reports_good_count = (long)em.createNamedQuery("getReports_goodCount", Long.class)
+                                    .getSingleResult();
+*/
         em.close();
 
         request.setAttribute("reports", reports);
         request.setAttribute("reports_count", reports_count);
+//        request.setAttribute("reports_good_count", reports_good_count);
         request.setAttribute("page", page);
         if(request.getSession().getAttribute("flush") != null) {
             request.setAttribute("flush", request.getSession().getAttribute("flush"));

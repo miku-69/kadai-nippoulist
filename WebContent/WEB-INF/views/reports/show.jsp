@@ -24,6 +24,24 @@
                             </td>
                         </tr>
                         <tr>
+                            <th>いいね</th>
+                            <td>
+                                <c:choose>
+                                <c:when test="${g == 0}">
+                                <form method="POST" action="<c:url value='/reports/report_good/add' />">
+                                    <input type="hidden" name="report_id" value="${report.id}">
+                                    <input type="submit" name="add" value="♡">
+                                </form>
+                                </c:when>
+                                <c:otherwise>
+                                <form method="POST" action="<c:url value='/reports/report_good/remove' />">
+                                    <input type="hidden" name="good_id" value="${report_good.id}">
+                                    <input type="submit" name="remove" value="♥">
+                                </form>
+                                </c:otherwise>
+                                </c:choose>
+                            </td>
+                        </tr>
                         <tr>
                             <th>登録日時</th>
                             <td>
